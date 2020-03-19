@@ -1,3 +1,9 @@
 # app.py for webapp in python
-from flask import flask
-app = Flask(_name_)
+from flask import Flask
+app = Flask(__name__)
+@app.route("/")
+def main():
+    return "welcome!"
+
+if __name__ == "__main__":
+    app.run()
