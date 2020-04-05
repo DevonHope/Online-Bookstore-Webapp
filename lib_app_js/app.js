@@ -40,8 +40,8 @@ app.get('/showSearch', function(req,res) {
 });
 
 app.get('/selectallusers', function (req, res, next) {
-  pool.query("select * from allops.tbl_user", (err, res) => {
-
+  pool.query("select * from allops.user", (err, res) => {
+    console.log(res.rows[0].user_id);
   });
   /*
   client.query('SELECT * FROM allops.user', [1], function(err, result){
