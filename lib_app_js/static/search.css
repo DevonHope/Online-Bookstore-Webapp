@@ -1,15 +1,10 @@
-body {
-  color: #fff;
-  margin: 0;
-}
-
 #content {
   position: absolute;
   height: 50px;
   width: 300px;
   margin-left: 170px;
-  top: 97%;
-  left: 90%;
+  top:12%;
+  left:90%;
   transform: translate(-50%, -50%);
 }
 

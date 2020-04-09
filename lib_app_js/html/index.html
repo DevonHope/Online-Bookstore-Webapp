@@ -10,24 +10,30 @@
   <body>
     <wrap class="wrapper clearfix">
         <header id="header">
-          <nav>
             <!--h3 class="topnav"><a href="#">Look Inna Book</h3-->
-            <h class="center_title" href="#">Look Inna Book</h>
-            <div onclick="menu(this)" style="padding-left:30px;">
+            <div id="menub" onclick="menu(this)">
               <div class="bar1"></div>
               <div class="bar2"></div>
               <div class="bar3"></div>
             </div>
-            <form id="content">
-              <input type="text" name="input" class="input" id="search-input">
-              <button type="reset" class="search" id="search-btn"></button>
-            </form>
-          </nav>
+            <h id="center_title">Look Inna Book</h>
+            <search id="search">
+              <form id="content">
+                <input type="text" name="input" class="input" id="search-input">
+                <button type="reset" class="search" id="search-btn"></button>
+              </form>
+            </search>
         </header>
         <form id="browse">
-          Trending
-          New
-          Staff Picks
+          <new>
+            New
+          </new>
+          <tren>
+            Trending
+          </tren>
+          <sp>
+            Staff Picks
+          </sp>
         </form>
         <footer id="footer">
             <p>&copy; Look_Inna_Book 2020</p>
