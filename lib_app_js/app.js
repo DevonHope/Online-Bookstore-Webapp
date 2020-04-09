@@ -23,7 +23,7 @@ client.query()
 //http://127.0.0.1:49957/?key=31710029-138c-43b6-8976-d9f8a0d7d78d
 */
 var app = express();
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/static'));
 app.set('port',process.env.PORT || 4000);
 
 app.get('/',(request,response) => {
