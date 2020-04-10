@@ -20,6 +20,16 @@
   width: 100%;
 }
 
+.img_text {
+    text-align: justify;
+    width: 100%;
+}
+
+.img_text img {
+    display: block;
+    margin: 0 auto;
+}
+
 /* Responsive layout - makes a two column-layout instead of four columns */
 @media screen and (max-width: 800px) {
   .column {
