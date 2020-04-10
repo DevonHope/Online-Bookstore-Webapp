@@ -2,81 +2,73 @@
 <html lang="en">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="/css/base.css" />
     <link rel="stylesheet" type="text/css" href="/css/sty.css" />
     <link rel="stylesheet" type="text/css" href="/css/menubtn.css" />
     <link rel="stylesheet" type="text/css" href="/css/search.css" />
     <link rel="stylesheet" type="text/css" href="/css/book_grid.css" />
   </head>
-  <body>
-    <wrap class="wrapper clearfix">
-        <header id="header">
-            <!--h3 class="topnav"><a href="#">Look Inna Book</h3-->
-            <div id="menub" onclick="menu(this)">
-              <div class="bar1"></div>
-              <div class="bar2"></div>
-              <div class="bar3"></div>
-            </div>
-            <sidenav id="sideNav" class="sidenav">
-              <!--a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a-->
-              <a href="/">Home</a>
-              <a href="showCart">Cart</a>
-              <a href="showCategories">Categories</a>
-              <a href="showSignin">Sign In</a>
-              <a href="showSignUp">Sign Up</a>
-              <a href="allbooks">get all books</a>
-            </sidenav>
-            <h id="center_title">Look Inna Book</h>
-            <search id="search">
-              <form id="content">
-                <input type="text" name="input" class="input" id="search-input">
-                <button type="reset" class="search" id="search-btn"></button>
-              </form>
-            </search>
-        </header>
-        <form id="browse" >
-          <new>
-            <div class="row">
-              <div class="column">
-                <% for(var i=0; i<book.length; i++) { %>
-                  <div class="img_txt">
-                    <%var name = "/img/books/" + book[i].bk_name + ".jpg";%>
-                    <img src=name alt="sometext">
-                    <span></span><%= book[i].bk_name %>
-                    <br/>
-                    <span></span><%= book[i].bk_price %>
-                  </div>
-                  <li class="list-group-item">
+  <body class = "wrapper">
+    <header id="header">
+        <!--h3 class="topnav"><a href="#">Look Inna Book</h3-->
+        <div id="menub" onclick="menu(this)">
+          <div class="bar1"></div>
+          <div class="bar2"></div>
+          <div class="bar3"></div>
+        </div>
+        <sidenav id="sideNav" class="sidenav">
+          <!--a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a-->
+          <a href="/">Home</a>
+          <a href="showCart">Cart</a>
+          <a href="showCategories">Categories</a>
+          <a href="showSignin">Sign In</a>
+          <a href="showSignUp">Sign Up</a>
+          <a href="allbooks">get all books</a>
+        </sidenav>
+        <h id="center_title">Look Inna Book</h>
+        <search id="search">
+          <form id="content">
+            <input type="text" name="input" class="input" id="search-input">
+            <button type="reset" class="search" id="search-btn"></button>
+          </form>
+        </search>
+    </header>
+    <form id="browse" >
+      <div class="column">
+        <new class="row">
+          <h2>New</h2>
+          <div class="img_txt">
+            <img src="/img/books/Dune.jpg">
+            <p>Dune</p>
+            <p>$6.99</p>
+          </div>
+          <div class="img_txt">
+            <img src="/img/books/The Hitchhikers Guide To The Galaxy.jpg">
+            <p>The Hitchhikers Guide To The Galaxy</p>
+            <p>$4.99</p>
+          </div>
+        </new>
+      <!-- <% for(var i=0; i<books.length; i++) { %>
+          <div class="img_txt">
+            <% var name = "/img/books/" + books[i].bk_name + ".jpg"; %>
+            <img src=<%"/img/books/" + book[i].bk_name + ".jpg";%> >
+            <span></span><%= books[i].bk_name %>
+            <br/>
+            <span></span><%= books[i].bk_price %>
+          </div>
+        <% } %>-->
+        <tren class="column">
+          <h2>Trending</h2>
+        </tren>
+        <sp class="column">
+          Staff Picks
+        </sp>
+      </div>
+    </form>
 
-                  </li>
-                <% } %>
-
-                <div class="img_txt">
-                  <img src="/img/book/H2G2_UK_front_cover.jpg">
-                </div>
-              </div>
-            </div>
-            New
-            <% for(var i=0; i<book.length; i++) {%>
-              <li class="list-group-item">
-                  <span></span><%= book[i].bk_name %>
-                  <br/>
-                  <span></span><%= book[i].bk_price %>
-              </li>
-            <% } %>
-          </new>
-          <tren>
-            Trending
-          </tren>
-          <sp>
-            Staff Picks
-          </sp>
-        </form>
-        <footer id="footer">
-            <p>&copy; Look_Inna_Book 2020</p>
-        </footer>
-    </wrap>
   </body>
+  <footer id="footer">
+      <p>&copy; Look_Inna_Book 2020</p>
+  </footer>
   <script>
     function menu(x){
       x.classList.toggle("change");

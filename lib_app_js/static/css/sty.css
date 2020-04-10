@@ -19,16 +19,33 @@ html,body{
   position:relative;
   font-family: 'IBM Plex Mono' !important;
   overflow-x: hidden;
-  overflow-y: hidden;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
-body::after {
-    content: "";
-    display: block;
-    height: 0;
-    width:0;
-    clear: both;
-    visibility: hidden;
+@import url('https://fonts.googleapis.com/css?family=Lobster&display=swap') repeat scroll 0 0 rgba(0, 0, 0 , 0);
+
+.wrapper {
+  background: url("/img/backg/background.webp");
+  color: #eee;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+  perspective-origin: 50% 50%;
+  animation: animation 100s linear infinite;
+  background-size:cover;
+}
+
+@keyframes animation {
+   100%{
+    background-position:0px -3000px;
+  }
 }
 
 .container{
@@ -36,16 +53,18 @@ body::after {
 }
 
 #browse{
+  flex:2;
   border-radius: 0;
   border: 4px solid #ffffff;
-  opacity:0.5;
+  /*opacity:0.5;*/
   padding: 20px;
   width: auto;
   height: auto;
   position: fixed;
-  top: 15%;
-  left: 15%;
+  top: 22%;
+  left: 10%;
   margin: 0 auto;
+  padding-bottom: 60px;
 }
 
 .signup{
@@ -61,21 +80,24 @@ body::after {
   margin: 0 auto;
 }
 
-#footer{
-  position:absolute;
+#footer, #push{
+  flex:3;
+  position:fixed;
   bottom:0;
   width:100%;
-  height:100px;
+  height:60px;
   color:#fff;
   padding:10px 10px;
+  margin: 0 auto 0 auto;
 }
 
 #header{
+  flex:1;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 25%;
   display: flex;
   padding:2%;
 }

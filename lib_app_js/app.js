@@ -2,11 +2,7 @@
 const express = require('express');
 const requestModule = require('request');
 const { Pool, Client } = require('pg');
-//const connectionString = 'postgres://postgres:popeey@localhost:5432/Bookstore';
-/*
-const client = new Client({
-  connectionString:connectionString
-});*/
+
 const pool = new Pool({
   user: "postgres",
   host: "localhost",
@@ -24,12 +20,6 @@ const client = new Client({
   port: "5432"
 });
 
-/*
-client.connect();
-console.log(client);
-client.query()
-//http://127.0.0.1:49957/?key=31710029-138c-43b6-8976-d9f8a0d7d78d
-*/
 var app = express();
 app.use(express.static(__dirname + '/static'));
 app.set('port',process.env.PORT || 4000);
@@ -49,18 +39,16 @@ app.get('/showSearch', function(req,res) {
 });
 
 app.get('/newBooks',function(req,res) {
-
-    client.connect(function(err){
+    pool.connect(function(err){
         if(err)
             throw err;
 
         var query = "select * from allops.book";
-
-        client.query(query,function(err,result){
+        pool.query(query,function(err,result){
             if(err)
                 throw err;
             else {
-                 res.render('book.ejs', { book: result });
+                 res.render('books.ejs', { books: result });
             }
         });
     });
@@ -68,7 +56,7 @@ app.get('/newBooks',function(req,res) {
 
 app.get('/allbooks', function (req, res, next) {
   pool.query("select * from allops.book",(err, res) => {
-    console.log(res.rows[0]);
+    console.log(res.rows);
   });
   /*
   client.query('SELECT * FROM allops.user', [1], function(err, result){
