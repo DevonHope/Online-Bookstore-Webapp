@@ -2,7 +2,11 @@
   font-family: 'IBM Plex Mono';
   font-style: normal;
   font-weight: 300;
-  src: local("IBM Plex Mono Light"), local("IBMPlexMono-Light"), url("../IBM-Plex-Mono/fonts/complete/woff2/IBMPlexMono-Light.woff2") format("woff2"), url("../IBM-Plex-Mono/fonts/complete/woff/IBMPlexMono-Light.woff") format("woff"); }
+  src: local("IBM Plex Mono Light"),
+  local("IBMPlexMono-Light"),
+  url("../IBM-Plex-Mono/fonts/complete/woff2/IBMPlexMono-Light.woff2") format("woff2"),
+  url("../IBM-Plex-Mono/fonts/complete/woff/IBMPlexMono-Light.woff") format("woff");
+}
 
 *{box-sizing: border-box;}
 
@@ -65,6 +69,7 @@ body::after {
 
 #menub{
   width:25%;
+  z-index:99;
 }
 
 #center_title{
