@@ -1,0 +1,76 @@
+doctype html
+html(lang='en')
+  head
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', type='text/css', href='/css/sty.css')
+    link(rel='stylesheet', type='text/css', href='/css/menubtn.css')
+    link(rel='stylesheet', type='text/css', href='/css/search.css')
+    link(rel='stylesheet', type='text/css', href='/css/book_grid.css')
+    script(src='/js/index.js')
+  body.wrapper
+    header#header
+      // h3 class="topnav"><a href="#">Look Inna Book</h3
+      #menub(onclick='menu(this)')
+        .bar1
+        .bar2
+        .bar3
+      sidenav#sideNav.sidenav
+        // a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a
+        a(href='/') Home
+        a(href='showCart') Cart
+        a(href='showCategories') Categories
+        a(href='showSignin') Sign In
+        a(href='showSignUp') Sign Up
+        a(href='allbooks') get all books
+      h#center_title Look Inna Book
+      search#search
+        form#content
+          input#search-input.input(type='text', name='input')
+          button#search-btn.search(type='reset')
+    form#browse
+      h2 New
+      grid.grid-container
+        - var books= books;
+        h1= books
+        - for(int i=0; i <books.length; ++){
+            - var cname = "book"+(i++);
+            .cname
+              - var name = "/img/books/" + book.bk_name + ".jpg";
+              img(src=name)
+              span= book.bk_name
+              span= book.bk_price 
+        - }
+      h2 Trending
+      grid.grid-container
+        .book1
+          img(src='/img/books/Dune.jpg')
+          p Dune
+          p $6.99
+        .book2
+          img(src='/img/books/The Hitchhikers Guide To The Galaxy.jpg')
+          p The Hitchhikers Guide To The Galaxy
+          p $4.99
+        .book3
+          img(src='/img/books/The Hitchhikers Guide To The Galaxy.jpg')
+          p The Hitchhikers Guide To The Galaxy
+          p $4.99
+      h2 Staff Picks
+      grid.grid-container
+        .book1
+          img(src='/img/books/Dune.jpg')
+          p Dune
+          p $6.99
+        .book2
+          img(src='/img/books/The Hitchhikers Guide To The Galaxy.jpg')
+          p The Hitchhikers Guide To The Galaxy
+          p $4.99
+        .book3
+          img(src='/img/books/The Hitchhikers Guide To The Galaxy.jpg')
+          p The Hitchhikers Guide To The Galaxy
+          p $4.99
+    
+      
+  //
+  //  footer id="footer">
+  //    <p>&copy; Look_Inna_Book 2020</p>
+  //    </footer

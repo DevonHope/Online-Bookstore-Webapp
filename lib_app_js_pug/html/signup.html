@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/css/base.css" />
+    <link rel="stylesheet" type="text/css" href="/css/sty.css" />
+    <link rel="stylesheet" type="text/css" href="/css/menubtn.css" />
+    <link rel="stylesheet" type="text/css" href="/css/search.css" />
+  </head>
+  <body>
+    <wrap class="wrapper clearfix">
+        <header id="header">
+            <!--h3 class="topnav"><a href="#">Look Inna Book</h3-->
+            <div id="menub" onclick="menu(this)">
+              <div class="bar1"></div>
+              <div class="bar2"></div>
+              <div class="bar3"></div>
+            </div>
+            <sidenav id="sideNav" class="sidenav">
+              <!--a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a-->
+              <a href="/">Home</a>
+              <a href="showCart">Cart</a>
+              <a href="showCategories">Categories</a>
+              <a href="showSignin">Sign In</a>
+              <a href="showSignUp">Sign Up</a>
+            </sidenav>
+            <h id="center_title">Look Inna Book</h>
+            <search id="search">
+              <form id="content">
+                <input type="text" name="input" class="input" id="search-input">
+                <button type="reset" class="search" id="search-btn"></button>
+              </form>
+            </search>
+        </header>
+        <form id="signUp" class="signup">
+          <!-- sign up form-->
+          
+        </form>
+        <footer id="footer">
+            <p>&copy; Look_Inna_Book 2020</p>
+        </footer>
+    </wrap>
+  </body>
+  <script>
+    function menu(x){
+      x.classList.toggle("change");
+      const sidenavw = document.getElementById("sideNav").style.width;
+      if(sidenavw == "250px"){
+        closeNav();
+      }else{
+        openNav();
+      }
+    }
+
+    function openNav(){
+      document.getElementById("sideNav").style.width = "250px";
+    }
+
+    function closeNav(){
+      document.getElementById("sideNav").style.width = "0";
+    }
+
+    const input = document.getElementById("search-input");
+    const searchBtn = document.getElementById("search-btn");
+
+    const expand = () => {
+      searchBtn.classList.toggle("close");
+      input.classList.toggle("square");
+    };
+
+    searchBtn.addEventListener("click", expand);
+  </script>
+</html>
