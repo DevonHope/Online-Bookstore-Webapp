@@ -41,12 +41,12 @@ def main():
                     print(func.mor_book())
                 elif(choice == 2):
                     e = 1
-                elif(choice > len(ops) - 1):
+                else:
                     print("Thats not an option")
         elif(choice == 3):
             signin = True
             print("Come back soon!")
-        elif(choice > len(ops) - 1):
+        else:
             print("Thats not an option")
 
 main()

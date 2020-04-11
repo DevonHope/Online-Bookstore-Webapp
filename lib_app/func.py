@@ -16,13 +16,6 @@ print("Connected!")
 cursor = conn.cursor()
 schema = "allops"
 
-def getRowNum():
-    table = "user"
-    row_count = "select count(*) from {}.{};".format(str(schema),str(table))
-    num_row = pd.read_sql(row_count,conn)
-    print(num_row)
-    print(num_row.at[0,'count'])
-
 def load_user(uname, pswd):
     table = "user"
     uname = "'"+uname+"'"
@@ -33,25 +26,23 @@ def load_user(uname, pswd):
     data = data.to_dict()
     return data
 
+def num_row(table):
+    row_count = "select count(*) from {}.{};".format(str(schema),str(table))
+    num_row = pd.read_sql(row_count,conn)
+    return int(num_row.at[0,'count']) + 1
+
 def add_user(name,uname,email,pswd):
     table = "user"
     name = "'"+name+"'"
     uname = "'"+uname+"'"
     email = "'"+email+"'"
     pswd = "'"+pswd+"'"
-    row_count = "select count(*) from {}.{};".format(str(schema),str(table))
-    num_row = pd.read_sql(row_count,conn)
-    id = int(num_row.at[0,'count']) + 1
-    sql_command = "insert into {}.{} (user_id, user_name, user_username, user_email, user_pswd) values ({},{},{},{},{});".format(str(schema), str(table),id,name,uname,email,pswd)
+    id = num_row(table)
+    sql_command = "insert into {}.{} (user_id, user_name, user_username, user_email, user_pswd) values ({},{},{},{},{});".format(str(schema), str(table),str(id),str(name),str(uname),str(email),str(pswd))
     data = pd.read_sql(sql_command, conn)
     #print(data.shape)
     data = data.to_dict()
     return data
-
-def rand_n(n):
-    range_start = 10**(n-1)
-    range_end = (10**n)-1
-    return randint(range_start, range_end)
 
 def pr_menu(ops):
     for index, op in enumerate(ops):
@@ -103,7 +94,7 @@ def sin_menu():
         elif(choice == 3):
             exit = 1
             print("Come back soon!")
-        elif(choice > len(ops)-1):
+        else:
             print("Thats not an option")
 
 def mor_book():
