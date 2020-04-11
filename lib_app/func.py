@@ -5,6 +5,7 @@ import pandas as pd
 import cred_pgsql as cred
 import pandas.io.sql as psgql
 from random import randint
+import current_user as cu
 
 # Set up a connection to the postgres server.
 conn_string = "host="+ cred.PGHOST +" port="+ "5432" +" dbname="+ cred.PGDATABASE +" user=" + cred.PGUSER \
@@ -22,7 +23,7 @@ def load_user(uname, pswd):
     pswd = "'"+pswd+"'"
     sql_command = "select * from {}.{} where user_username = {} and user_pswd = {};".format(str(schema), str(table), uname, pswd)
     data = pd.read_sql(sql_command, conn)
-    #print(data.shape)
+    #print(data)
     data = data.to_dict()
     return data
 
@@ -50,13 +51,22 @@ def pr_menu(ops):
     return int(input("- "))
 
 def signin():
-    uname = input("Username: ")
-    pswd = input("Password: ")
-    res = load_user(uname, pswd)
-    if(not res):
-        return 0
-    else:
-        return 1
+    loop = 0
+    while(loop == 0):
+        uname = input("Username: ")
+        pswd = input("Password: ")
+        res = load_user(uname, pswd)
+        print(res)
+        print(res["user_pswd"][0])
+        if(res["user_pswd"][0] == pswd and res["user_username"][0] == uname):
+            print("You're signed in!")
+            print()
+            sin_menu()
+            loop=1
+        else:
+            ans = input("Thats not right, try again?(y or n) ")
+            if(ans == 'n' or ans == 'N'):
+                loop = 1
 
 def signup():
     print("Please enter the following information to create your Look Inna Book account!")
@@ -78,11 +88,25 @@ def browse():
     data = data.to_dict()
     return data
 
+def browse_menu():
+    e = 0
+    while(e == 0):
+        ops = ["Sign in to buy book", "More info on specific book", "Main menu"]
+        choice = pr_menu(ops)
+        if(choice == 0):
+            signin()
+        elif(choice == 1):
+            print(mor_book())
+        elif(choice == 2):
+            e = 1
+        else:
+            print("Thats not an option")
+
 def sin_menu():
     #New signed in user menu
     exit = 0
     while(exit == 0):
-        ops=["Browse","Search","Cart", "Exit"]
+        ops=["Browse","Search","Cart","Sign out", "Exit"]
         print("Please select an option from the list below by number")
         choice = pr_menu(ops)
         if(choice == 0):
@@ -92,6 +116,9 @@ def sin_menu():
         elif(choice == 2):
             cart()
         elif(choice == 3):
+            exit = 1
+            print("Signed out!")
+        elif(choice == 4):
             exit = 1
             print("Come back soon!")
         else:
@@ -104,3 +131,16 @@ def mor_book():
     data = pd.read_sql(sql_command, conn)
     #print(data)
     return data
+
+"""
+def load_data(schema, table):
+
+    sql_command = "SELECT * FROM {}.{};".format(str(schema), str(table))
+    print (sql_command)
+
+    # Load the data
+    data = pd.read_sql(sql_command, conn)
+
+    print(data.shape)
+    return (data)
+"""
