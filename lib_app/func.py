@@ -50,6 +50,7 @@ def pr_menu(ops):
         print("("+str(index)+") " +op)
     return int(input("- "))
 
+#ACTS AS MENU
 def signin():
     loop = 0
     while(loop == 0):
@@ -88,6 +89,7 @@ def browse():
     data = data.to_dict()
     return data
 
+#ACTS AS MENU
 def browse_menu():
     e = 0
     while(e == 0):
@@ -102,6 +104,7 @@ def browse_menu():
         else:
             print("Thats not an option")
 
+#ACTS AS MENU
 def sin_menu():
     #New signed in user menu
     exit = 0
