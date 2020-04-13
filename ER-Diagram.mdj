@@ -1937,6 +1937,19 @@
 							"headNameLabel": {
 								"$ref": "AAAAAAFw8O4gMB0nGIY="
 							}
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAFxdVbMvyXaedk=",
+							"_parent": {
+								"$ref": "AAAAAAFw8KYLaRm2XSM="
+							},
+							"font": "Arial;13;0",
+							"left": 496,
+							"top": 16,
+							"width": 232,
+							"height": 88,
+							"text": "LEGEND:\n\n"
 						}
 					]
 				},
