@@ -45,8 +45,25 @@ def load_user(uname, pswd):
     return data
 
 def update_cart(user):
-    table="book"
-    con = "update {}.{} set ch_userid = {}, ch_billaddr = {}, ch_shipaddr = {}, ch_books = {};".format(str(schema),str(table),str(user.getID()), str(user.getBA()), str(user.getSA()), str(user.getCheck()))
+    table="checkout"
+    getid = "select * from {}.{} where ch_userid = {};".format(str(schema),str(table),str(user.getID()))
+    res = load_db(getid)
+    names = user.getCheck().keys()
+    #print(names)
+    price = user.getCheck().values()
+    #print(price)
+    book = []
+    for n in names:
+        for p in price:
+            book.append(""+n+":"+str(p))
+        #print(n)
+    book = str( book)
+    book = book.replace('[', '{').replace(']', '}').replace('\'', '\"')
+    #query = '''update "aTable" SET "Test" = '%s\'''' %(list)
+    if(not res['ch_userid']):
+        con = "insert into {}.{} values ({},{},{},{});".format(str(schema),str(table),str(user.getID()), str(user.getBA()), str(user.getSA()),book)
+    else:
+        con = "update {}.{} set ch_books = {};".format(str(schema),str(table), book)
     insert_db(con)
     print("Cart added to DB")
 

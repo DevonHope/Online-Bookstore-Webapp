@@ -56,10 +56,26 @@ def browse_menu(user):
                 print()
 
 def check_menu(user):
+    #print cart
+    func.cart(user)
+    total = 0
+    l = user.getCheck().values()
+    for val in l:
+        total += int(val)
+    print("Total: $" + str(total))
+    print()
     e = 0
     while(not e):
-        ops = [""]
         #print cart, prices and total
+        ops = ["Checkout", "Cancel"]
+        choice = func.pr_menu(ops)
+        if(choice == 0):
+            print("Checked out!")
+            print()
+            e=1
+        elif(choice == 1):
+            e = 1
+            print()
 
 #ACTS AS MENU
 def sin_menu(user):

@@ -53,6 +53,9 @@ class cuser:
         self.biladdr = biladdr
         self.shipaddr = shipaddr
         self.checkout = checkout
+
+
+
 """
 class checkout:
     def __init__(self, id, biladdr, shipaddr, book):
