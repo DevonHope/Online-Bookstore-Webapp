@@ -22,6 +22,12 @@ class cuser:
     def getSA(self):
         return self.shipaddr
 
+    def setSA(self, BA):
+        self.shipaddr = BA
+
+    def setSA(self, SA):
+        self.shipaddr = SA
+
     def getCheck(self):
         return self.checkout['books']
 

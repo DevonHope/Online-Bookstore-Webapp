@@ -45,6 +45,7 @@ def load_user(uname, pswd):
     return data
 
 def update_cart(user):
+    print("THIS DOES NOT WORK YET")
     table="checkout"
     getid = "select * from {}.{} where ch_userid = {};".format(str(schema),str(table),str(user.getID()))
     res = load_db(getid)
@@ -53,19 +54,76 @@ def update_cart(user):
     price = user.getCheck().values()
     #print(price)
     book = []
+    """
+    print(user.getCheck())
+    for i,e in enumerate(user.getCheck()):
+        book.append(""++":"+)
+
+    print(book)
     for n in names:
         for p in price:
             book.append(""+n+":"+str(p))
         #print(n)
     book = str( book)
-    book = book.replace('[', '{').replace(']', '}').replace('\'', '\"')
+    print(book)
+    """
+    #book = book.replace('[', '{').replace(']', '}').replace('\'', '\"')
     #query = '''update "aTable" SET "Test" = '%s\'''' %(list)
+    if(user.getBA() is None and user.getSA() is None):
+        #get billing address
+        user = getAddr(user)
     if(not res['ch_userid']):
-        con = "insert into {}.{} values ({},{},{},{});".format(str(schema),str(table),str(user.getID()), str(user.getBA()), str(user.getSA()),book)
+        con = "insert into {}.{} (ch_userid, ch_books) values ({},{},{},ARRAY{});".format(str(schema),str(table),str(user.getID()),book)
     else:
-        con = "update {}.{} set ch_books = {};".format(str(schema),str(table), book)
+        con = "update {}.{} set ch_books = ARRAY{};".format(str(schema),str(table), book)
     insert_db(con)
     print("Cart added to DB")
+
+def getAddr(user):
+    print()
+    print("SHIPPING ADDRESS")
+    print("Please enter your shipping address")
+    print()
+    loop = 1
+    while(loop):
+        s_streetnum = input("Steet number: ")
+        if(not isinstace(streetnum, int)):
+            a = input("That doesnt seem to be a street number, try again? ")
+            if(a == 'n' or a == 'N'):
+                loop = 0
+    s_streetname = input("Street name: ")
+    s_city = input("City: ")
+    s_SP = input("State or Province: ")
+    s_Country = input("Country: ")
+    s_postzip = input("Zip or Postal code: ")
+    print()
+    ans = input("Is your shipping address the same as your billing address?(y or n) ")
+    if(ans == 'n' or ans == 'N'):
+        #ask for both
+        print()
+        print("BILLING ADDRESS")
+        print()
+        loop = 1
+        while(loop):
+            b_streetnum = input("Steet number: ")
+            if(not isinstace(streetnum, int)):
+                a = input("That doesnt seem to be a street number, try again? ")
+                if(a == 'n' or a == 'N'):
+                    loop = 0
+        b_streetname = input("Street name: ")
+        b_city = input("City: ")
+        b_SP = input("State or Province: ")
+        b_Country = input("Country: ")
+        b_postzip = input("Zip or Postal code: ")
+        b_addr = b_streetnum+" " + b_streetname +", "+ b_city +", "+b_SP+", "+b_Country+", "+b_postzip
+        user.setBA(b_addr)
+    elif(ans == 'y' or ans == 'Y'):
+        #ask for one
+        addr = s_streetnum+" " + s_streetname +", "+ s_city +", "+s_SP+", "+s_Country+", "+s_postzip
+        user.setBA(addr)
+    s_addr = s_streetnum+" "+s_streetname +", "+ s_city +", "+s_SP+", "+s_Country+", "+s_postzip
+    user.setSA(s_addr)
+    return user
 
 def num_row(table):
     row_count = "select count(*) from {}.{};".format(str(schema),str(table))
