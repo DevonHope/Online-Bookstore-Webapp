@@ -31,10 +31,11 @@ pdfproducer={PDFLaTeX},%
 \tableofcontents
 \newpage
 \section{Conceptual Design}
-This section explains and demonstrates how the database uses the ER-Diagram to store and hold all neccessary information given in the project summary. 
+\qquad This section explains and demonstrates how the database uses the ER-Diagram to store and hold all neccessary information given in the project summary. 
 \subsection{ER-Diagram}
 {\centering \includegraphics[width=\textwidth/1]{ER_D.png}}
 \subsection{Explanation}
+\qquad This diagram contains all of the necessary entities to store all necessary information created by and used by the user in the program during runtime. All user information is stored in the user entity when they are signed into the program, this way everything they need is easily accessible. All of the users cart and checkout information is stored in the entities checkout and checkout basket, checkout stores the user id, records their shipping and billing addresses, and checkout basket stores all of the books in the users cart, the book entity is a foreign key for the book entity. When the user goes to checkout their cart, and is successful, all tracking information for their order is stored in the order tracking entity and the final tracking information from the third party shipping company is given and stored in the tracking entity. The tracking entity is a foreign key for the order tracking entity. The publisher entity holds all information needed by the user and the owner of the store on each publisher, the user only needs a name whereas the owner can see all other information required. The owner entity holds all of the relevant information for the owner, such as the a foreign key for the publisher entity id. The reports entity holds all of the reports created by the program. 
 \section{Reduction to Relation Schemas}
 \section{Normalization of Relation Schemas}
 \section{Database Schema Diagram}
