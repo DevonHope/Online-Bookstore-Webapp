@@ -103,8 +103,11 @@ These are stills of basic scenarios that have been imeplemented so far. Hopefull
 \item Navigate to \path{C:\Program Files\PostgreSQL\12\bin} or the bin folder of the latest version of your postgresql folder installed on your machine
 \item Clone or download the git repo to your machine
 \item Open the folder \path{\lib_app\pgdb\} under the \path{look_inna_book} project folder and copy the directory to the file \path{lib_app\pgdb\latest_db_back.sql} file
-\item Change the command below to add your username and directory path to the file \path{latest_db_backsql}: \\
-\path{psql -U <username> Bookstore < ..\look_inna_book\lib_app\pgdb\latest_db_back.sql}
+\item Open the psql command shell with the command: \\\\ \path{psql -U username -d Bookstore}\\
+NOTE: Replace username with the username for your server
+\item Change the command below to add your username and directory path to the file \path{latest_db_back.sql}: \\\\
+\path{\i ../look_inna_book/lib_app/pgdb/latest_db_back.sql}
+\\\\NOTE: Make sure the slashes in the path to the file are forward `/'
 \item Enter the password for your postgresql server\\\\
 NOTE: The command above, updates the currently running postgresql server with my database structure and data
 \end{enumerate}
@@ -112,8 +115,11 @@ NOTE: The command above, updates the currently running postgresql server with my
 \begin{enumerate}
 \item Esnure python3 or later is installed on your machine by opening a terminal and typing: \path{python --version}
 \item Open the file \path{cred_pgsql.py}
-\item Change the variables PGUSER and PGPASSWORD to your postgrsql username and password for the server
-\item To run the program, navigate to the \path{lib_app} folder use the command: \path{python app.py}
+\item Change the variables PGUSER and PGPASSWORD to your postgresql username and password for the server
+\item To run the program, navigate to the \path{lib_app} folder in a terminal and use the command: \\\\
+\path{python app.py}
+\\\\NOTE: The owner ID is `1', username: `Mansly' and password: `not pass' for siging into the owner account\\
+If no owner account is present, the program will prompt you to create one before running
 \end{enumerate}
 
 \end{document}

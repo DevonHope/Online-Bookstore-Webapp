@@ -228,6 +228,8 @@ def sin_menu(user):
             print("Thats not an option")
 
 def main():
+    if(not owner['user_id']):
+        break
     print("Welcome to Look Inna Book Bookstore!")
     sign = False
     while(not sign):

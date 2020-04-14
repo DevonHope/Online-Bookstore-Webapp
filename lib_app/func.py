@@ -364,7 +364,38 @@ def getOwner():
     table = "user"
     owner_id = 1
     q = "select * from {}.{} where user_id = {};".format(str(schema),str(table),owner_id)
-    return load_db(q)
+    res = load_db(q)
+    if(res['user_id']):
+        return res
+    else:
+        l=1
+        while l:
+            print("ERROR!")
+            print("NO OWNER ACCOUNT FOUND")
+            ans = input("Would you like to create an owner account?(y or n) ")
+            if( ans == 'y' or ans == 'Y'):
+                owner_id = input("Owner ID: ")
+                owner_id = "'"+owner_id+"'"
+                name = input("Name: ")
+                name = "'"+name+"'"
+                uname = input("Username: ")
+                uname = "'"+uname+"'"
+                email = input("Email: ")
+                email = "'"+email+"'"
+                ps = input("Password: ")
+                ps = "'"+ps+"'"
+                q = "insert into {}.{} (user_id, user_name, user_username, user_email, user_pswd) values ({},{},{},{},{})".format(str(schema), str(table),str(owner_id),str(name),str(uname),str(email),str(ps))
+                insert_db(q)
+                print("OWNER ACCOUNT CREATED")
+                print()
+            elif(ans == 'n' or ans == 'N'):
+                print()
+                print("NO OWNERS ARE PRESENT")
+                print("WITHOUT OWNERS THE STORE CANNOT OPERATE")
+                print("STORE IS SHUTTING DOWN")
+                print("byebye")
+                print()
+                l=0
 
 """
 def load_data(schema, table):
