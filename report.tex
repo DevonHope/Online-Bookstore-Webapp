@@ -37,14 +37,20 @@ pdfproducer={PDFLaTeX},%
 \subsection{Explanation}
 \qquad This diagram contains all of the necessary entities to store all necessary information created by and used by the user in the program during runtime. All user information is stored in the user entity when they are signed into the program, this way everything they need is easily accessible. All of the users cart and checkout information is stored in the entities checkout and checkout basket, checkout stores the user id, records their shipping and billing addresses, and checkout basket stores all of the books in the users cart, the book entity is a foreign key for the book entity. When the user goes to checkout their cart, and is successful, all tracking information for their order is stored in the order tracking entity and the final tracking information from the third party shipping company is given and stored in the tracking entity. The tracking entity is a foreign key for the order tracking entity. The publisher entity holds all information needed by the user and the owner of the store on each publisher, the user only needs a name whereas the owner can see all other information required. The owner entity holds all of the relevant information for the owner, such as the a foreign key for the publisher entity id. The reports entity holds all of the reports created by the program. 
 \section{Reduction to Relation Schemas}
+{\centering \includegraphics[width=\textwidth/1]{RS_D.png}}
 \section{Normalization of Relation Schemas}
+\subsection{Normalization}
+{\centering \includegraphics[width=\textwidth/1]{NRS_D.png}}
+\subsection{Explanation}
+\qquad Every schema passes the 1NF test but the registry schema, this registry holds a user id, that is a unique string that contains the id of the user, a total of the books they have bought and the books in their cart. These three attributes in one string are usually well defined for each user and are not easily replicable. This could or could not pass the 1NF test, I personally would pass it, but if this was to be released globally, I would decompose it and reconstruct it into four or five defining attributes including the user\_id, user\_username, total\_books, total\_cart and or user\_email. As for order tracking, I believe it passes the first test, 1NF, and the second, 2NF, as for the third one, it does have transitive functional properties, specifically the attribute tracking. To allow for all three tests, tracking could absorb order tracking, as they have similar attributes, and one of them is transitive, this was initially designed to create a layer of security, but ultimately does not work in a functioning practice. 
 \section{Database Schema Diagram}
+{\centering \includegraphics[width=\textwidth/1]{Schema_D.png}}
 \section{Implementation}
 \subsection{Overview}
+\qquad I tried to complete the user and owner front end with a node.js web client but I couldn't before the due date, instead I implemented most of the user features, excluding the checkout and tracking in a command line version. I have pushed all versions of my project, whether complete or incomplete, to my github attached below. The version that works the best is under the directory `lib\_app', it uses python to query and connect to the postgresql and as an interface with the user. 
 \subsection{Scenarios}
 \section{Github Repostiory}
-\href{https://github.com/WalterMitty2112/Online-Bookstore-Webapp}{Look Inna Book: Online Bookstore}
+\href{https://github.com/WalterMitty2112/Online-Bookstore-Webapp}{Git Repo (Look Inna Book: Online Bookstore)}
 \section{Instructions for Submission}
-
 
 \end{document}
