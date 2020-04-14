@@ -94,6 +94,7 @@ def check_menu(user):
                         loop=0
             #here it should print a tracking number
             func.createTrack(user)
+            func.clearCart(user)
         elif(choice == 1):
             e = 1
             print("Cart saved!")
@@ -228,32 +229,31 @@ def sin_menu(user):
             print("Thats not an option")
 
 def main():
-    if(not owner['user_id']):
-        break
-    print("Welcome to Look Inna Book Bookstore!")
-    sign = False
-    while(not sign):
-        ops= ["Sign in", "Sign up", "Search", "Browse books", "Exit"]
-        print("Please select an option from the list below by number")
-        choice = func.pr_menu(ops)
-        if(choice == 0):
-            if(signin(user)):
-                sin_menu(user)
-                sign=True
-        elif(choice == 1):
-            func.signup()
-        elif(choice == 2):
-            func.search()
-        elif(choice == 3):
-            func.browse()
-            browse_menu(user)
-            if(user.getID()):
-                sin_menu(user)
-        elif(choice == 4):
-            sign = True
-            print("Come back soon!")
-        else:
-            print("Thats not an option")
+    if(owner['user_id']):
+        print("Welcome to Look Inna Book Bookstore!")
+        sign = False
+        while(not sign):
+            ops= ["Sign in", "Sign up", "Search", "Browse books", "Exit"]
+            print("Please select an option from the list below by number")
+            choice = func.pr_menu(ops)
+            if(choice == 0):
+                if(signin(user)):
+                    sin_menu(user)
+                    sign=True
+            elif(choice == 1):
+                func.signup()
+            elif(choice == 2):
+                func.search()
+            elif(choice == 3):
+                func.browse()
+                browse_menu(user)
+                if(user.getID()):
+                    sin_menu(user)
+            elif(choice == 4):
+                sign = True
+                print("Come back soon!")
+            else:
+                print("Thats not an option")
 
 owner = func.getOwner()
 user = cu.cuser(None, None, None, None, None, None)

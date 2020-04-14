@@ -78,6 +78,11 @@ def createTrack(user):
     insert_db(q)
     print("Tracking number: "+s)
 
+def clearCart(user):
+    table = "checkout"
+    q = "delete from {}.{} where ch_userid = {};".format(str(schema),str(table),str(user.getID()))
+    insert_db(q)
+
 def mkOrderNum(user):
     i = num_row("order_track") + user.getID()
     print("Your Order Number: " + str(i))

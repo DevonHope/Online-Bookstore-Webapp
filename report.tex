@@ -54,10 +54,10 @@ pdfproducer={PDFLaTeX},
 {\centering \includegraphics[width=\textwidth/1]{Schema_D.png}}
 \section{Implementation}
 \subsection{Overview}
-\qquad I tried to complete the user and owner front end with a node.js web client but I couldn't before the due date, instead I implemented most of the user features, excluding the checkout and tracking in a command line version. I have pushed all versions of my project, whether complete or incomplete, to my github attached below. The version that works the best is under the directory `lib\_app', it uses python to query and connect to the postgresql and as an interface with the user. 
+\qquad I tried to complete the user and owner front end with a node.js web client but I couldn't before the due date, instead I implemented most of the user features, excluding the checkout and tracking in a command line version. I have pushed all versions of my project, whether complete or incomplete, to my github attached below. The version that works the best is under the directory \path{`lib_app'}, it uses python to query and connect to the postgresql database and as an interface with the user. All features except for the owner menu work, that is all features on the client side work, you can sign in as an owner of the store but no actually features are implemented and all options are surface value. The owner sign in information is listed below in the instructions.
 \subsection{Scenarios}
 \subsubsection{lib\_app}
-These are stills of basic scenarios that have been imeplemented so far. Hopefully most if not all of the implementation is done before the due date, although this is a large program. The program is simple, its menu based, you select your options  and give answers to questions like what book you want or which option number to choose. These basic scenarios contain stills of the main menu, signing in, browsing the books, displaying more information on a specific book, searching for a specific book, adding books to your cart and displaying you cart\\\\
+These are stills of basic scenarios that have been imeplemented so far. Hopefully most if not all of the implementation is done before the due date, although this is a large program. The program is simple, its menu based, you select your options  and give answers to questions like what book you want or which option number to choose. These basic scenarios contain stills of the main menu, signing in, browsing the books, displaying more information on a specific book, searching for a specific book, adding books to your cart and displaying your cart. The checkout and tracking features work as well as the owner menu pops up when signed into an owner account. The owner menu is surface only, no functions actually work, but attempts were made. \\\\
 \begin{figure}
 \centering 
 \includegraphics[width=\textwidth/1]{scenarios_cmd/Main_menu.png} 
@@ -103,7 +103,7 @@ These are stills of basic scenarios that have been imeplemented so far. Hopefull
 \item Navigate to \path{C:\Program Files\PostgreSQL\12\bin} or the bin folder of the latest version of your postgresql folder installed on your machine
 \item Clone or download the git repo to your machine
 \item Open the folder \path{\lib_app\pgdb\} under the \path{look_inna_book} project folder and copy the directory to the file \path{lib_app\pgdb\latest_db_back.sql} file
-\item Open the psql command shell with the command: \\\\ \path{psql -U username -d Bookstore}\\
+\item Open the \path{psql} command shell with the command: \\\\ \path{psql -U username -d Bookstore}\\\\
 NOTE: Replace username with the username for your server
 \item Change the command below to add your username and directory path to the file \path{latest_db_back.sql}: \\\\
 \path{\i ../look_inna_book/lib_app/pgdb/latest_db_back.sql}
