@@ -101,9 +101,10 @@ These are stills of basic scenarios that have been imeplemented so far. Hopefull
 \item Create a database called Bookstore under a postgrsql 12 server
 \item Open a terminal or cmd for windows
 \item Navigate to \path{C:\Program Files\PostgreSQL\12\bin} or the bin folder of the latest version of your postgresql folder installed on your machine
-\item Open the folder \path{\lib_app\pgdb} under the \path{lib_app} inside the project folder and copy the directory to the file \path{lib_app\pgdb\latest_DB_BACK.sql} file
-\item Change the command below to add your username and directory path to the file \path{latest_DB_BACK.sql}: \\
-\path{psql -U <username> Bookstore < ..\look_inna_book\lib_app\pgdb\latest_DB_BACK.sql}
+\item Clone or download the git repo to your machine
+\item Open the folder \path{\lib_app\pgdb\} under the \path{look_inna_book} project folder and copy the directory to the file \path{lib_app\pgdb\latest_db_back.sql} file
+\item Change the command below to add your username and directory path to the file \path{latest_db_backsql}: \\
+\path{psql -U <username> Bookstore < ..\look_inna_book\lib_app\pgdb\latest_db_back.sql}
 \item Enter the password for your postgresql server\\\\
 NOTE: The command above, updates the currently running postgresql server with my database structure and data
 \end{enumerate}

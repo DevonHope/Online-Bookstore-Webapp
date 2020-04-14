@@ -23,10 +23,6 @@ SET row_security = off;
 -- Name: allops; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
-drop database if exists DB_name;
-create database DB_name;
-drop schema if exists allops;
-
 CREATE SCHEMA allops;
 
 

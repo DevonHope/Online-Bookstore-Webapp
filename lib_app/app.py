@@ -101,6 +101,9 @@ def check_menu(user):
 
 def owner_menu(user):
     print("ADMIN MENU")
+    print()
+    print("THIS DOESNT WORK YET")
+    print()
     l = 1
     while l:
         ops=["Book management", "Pubisher management", "Reports management", "Sign out"]
