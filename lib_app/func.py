@@ -5,6 +5,7 @@ import pandas as pd
 import cred_pgsql as cred
 import pandas.io.sql as psgql
 from random import randint
+import random
 import current_user as cu
 import pprint
 import string
@@ -44,38 +45,63 @@ def load_user(uname, pswd):
     data = load_db(sql_command)
     return data
 
+def getTrack(user):
+    print()
+    print("TRACKING INFORMATION")
+    on = input("Order #: ")
+    on = "'"+on+"'"
+    table = "order_track"
+    q = "select * from {}.{} where order_num = {};".format(str(schema),str(table),str(on))
+    res = load_db(q)
+    print("Tracking #: "+res['track_num'][0])
+    print("Last Location: "+res['last_loc'][0])
+    his = res['track_history'][0]
+    print()
+    print("Tracking history: ")
+    for place in his:
+        print(" - "+place)
+    print()
+
+def createTrack(user):
+    # create a random conn_string for tracking
+    #get order number
+    on = mkOrderNum(user)
+    letters = string.ascii_lowercase
+    s = ''.join(random.choice(letters) for i in range(10))
+    s = "'LIB-"+str(user.getID())+s+"'"
+    #add to order_track table in db
+    #normally all of this would be updated by the shipper but...
+    history=['Shipped from warehouse','Left origin state']
+    last = "'Origin state'"
+    table = "order_track"
+    q = "insert into {}.{} (order_num, track_num, last_loc, track_history) values ({},{},{},ARRAY{})".format(str(schema),str(table),on,s,last, history)
+    insert_db(q)
+    print("Tracking number: "+s)
+
+def mkOrderNum(user):
+    i = num_row("order_track") + user.getID()
+    print("Your Order Number: " + str(i))
+    print()
+    return i
+
 def update_cart(user):
-    print("THIS DOES NOT WORK YET")
+    #this works now
     table="checkout"
     getid = "select * from {}.{} where ch_userid = {};".format(str(schema),str(table),str(user.getID()))
     res = load_db(getid)
-    names = user.getCheck().keys()
-    #print(names)
-    price = user.getCheck().values()
     #print(price)
     book = []
-    """
-    print(user.getCheck())
     for i,e in enumerate(user.getCheck()):
-        book.append(""++":"+)
+        book.append(""+e+":"+str(user.getCheck()[e]))
 
-    print(book)
-    for n in names:
-        for p in price:
-            book.append(""+n+":"+str(p))
-        #print(n)
     book = str( book)
-    print(book)
-    """
-    #book = book.replace('[', '{').replace(']', '}').replace('\'', '\"')
-    #query = '''update "aTable" SET "Test" = '%s\'''' %(list)
     if(user.getBA() is None and user.getSA() is None):
         #get billing address
         user = getAddr(user)
     if(not res['ch_userid']):
-        con = "insert into {}.{} (ch_userid, ch_books) values ({},{},{},ARRAY{});".format(str(schema),str(table),str(user.getID()),book)
+        con = "insert into {}.{} (ch_userid, ch_books, ch_biladdr, ch_shipaddr) values ({},ARRAY{},{},{});".format(str(schema),str(table),str(user.getID()),book,str(user.getBA()), str(user.getSA()))
     else:
-        con = "update {}.{} set ch_books = ARRAY{};".format(str(schema),str(table), book)
+        con = "update {}.{} set ch_books = ARRAY{} where ch_userid = {};".format(str(schema),str(table), book,str(user.getID()))
     insert_db(con)
     print("Cart added to DB")
 
@@ -84,13 +110,8 @@ def getAddr(user):
     print("SHIPPING ADDRESS")
     print("Please enter your shipping address")
     print()
-    loop = 1
-    while(loop):
-        s_streetnum = input("Steet number: ")
-        if(not isinstace(streetnum, int)):
-            a = input("That doesnt seem to be a street number, try again? ")
-            if(a == 'n' or a == 'N'):
-                loop = 0
+
+    s_streetnum = input("Steet number: ")
     s_streetname = input("Street name: ")
     s_city = input("City: ")
     s_SP = input("State or Province: ")
@@ -103,32 +124,43 @@ def getAddr(user):
         print()
         print("BILLING ADDRESS")
         print()
-        loop = 1
-        while(loop):
-            b_streetnum = input("Steet number: ")
-            if(not isinstace(streetnum, int)):
-                a = input("That doesnt seem to be a street number, try again? ")
-                if(a == 'n' or a == 'N'):
-                    loop = 0
+        b_streetnum = getInt("Steet number: ")
         b_streetname = input("Street name: ")
         b_city = input("City: ")
         b_SP = input("State or Province: ")
         b_Country = input("Country: ")
         b_postzip = input("Zip or Postal code: ")
-        b_addr = b_streetnum+" " + b_streetname +", "+ b_city +", "+b_SP+", "+b_Country+", "+b_postzip
+        b_addr = "'"+b_streetnum+" " + b_streetname +", "+ b_city +", "+b_SP+", "+b_Country+", "+b_postzip+"'"
         user.setBA(b_addr)
     elif(ans == 'y' or ans == 'Y'):
         #ask for one
-        addr = s_streetnum+" " + s_streetname +", "+ s_city +", "+s_SP+", "+s_Country+", "+s_postzip
+        addr = "'"+s_streetnum+" " + s_streetname +", "+ s_city +", "+s_SP+", "+s_Country+", "+s_postzip+"'"
         user.setBA(addr)
-    s_addr = s_streetnum+" "+s_streetname +", "+ s_city +", "+s_SP+", "+s_Country+", "+s_postzip
+    s_addr = "'"+s_streetnum+" "+s_streetname +", "+ s_city +", "+s_SP+", "+s_Country+", "+s_postzip+"'"
     user.setSA(s_addr)
+    #update db
+    table = "user"
+    con = "update {}.{} set user_biladdr = {}, user_shipaddr = {} where user_id = {};".format(str(schema), str(table), str(user.getBA()), str(user.getSA()),str(user.getID()))
+    insert_db(con)
     return user
+
+def getInt(mes):
+    loop = 1
+    while loop:
+        res = input(mes)
+        try:
+            i = int(res)
+            return i
+        except ValueError:
+            ans = input("That wasn't a number, try again?(y or n) ")
+            if(ans == 'n' or ans == 'N'):
+                loop = 0
 
 def num_row(table):
     row_count = "select count(*) from {}.{};".format(str(schema),str(table))
-    num_row = pd.read_sql(row_count,conn)
-    return int(num_row.at[0,'count']) + 1
+    num_row = load_db(row_count)
+    #print(num_row)
+    return int(num_row['count'][0]) + 1
 
 def add_user(name,uname,email,pswd):
     table = "user"
@@ -327,6 +359,12 @@ def search():
             loop = 1
         else:
             print("Please enter anything or 'e' to exit")
+
+def getOwner():
+    table = "user"
+    owner_id = 1
+    q = "select * from {}.{} where user_id = {};".format(str(schema),str(table),owner_id)
+    return load_db(q)
 
 """
 def load_data(schema, table):

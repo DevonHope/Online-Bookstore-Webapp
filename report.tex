@@ -23,6 +23,13 @@ pdfproducer={PDFLaTeX},
 % \usepackage[francais]{babel}
 \usepackage{hyperref}
 \usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[section]{placeins}
+\newcommand*{\figuretitle}[1]{%
+    {\centering%   <--------  will only affect the title because of the grouping (by the
+    \textbf{#1}%              braces before \centering and behind \medskip). If you remove
+    \par\medskip}%            these braces the whole body of a {figure} env will be centered.
+}
 \input{macros.tex}
 
 \begin{document}
@@ -50,7 +57,42 @@ pdfproducer={PDFLaTeX},
 \qquad I tried to complete the user and owner front end with a node.js web client but I couldn't before the due date, instead I implemented most of the user features, excluding the checkout and tracking in a command line version. I have pushed all versions of my project, whether complete or incomplete, to my github attached below. The version that works the best is under the directory `lib\_app', it uses python to query and connect to the postgresql and as an interface with the user. 
 \subsection{Scenarios}
 \subsubsection{lib\_app}
-\subsubsection{lib\_app\_js}
+These are stills of basic scenarios that have been imeplemented so far. Hopefully most if not all of the implementation is done before the due date, although this is a large program. The program is simple, its menu based, you select your options  and give answers to questions like what book you want or which option number to choose. These basic scenarios contain stills of the main menu, signing in, browsing the books, displaying more information on a specific book, searching for a specific book, adding books to your cart and displaying you cart\\\\
+\begin{figure}
+\centering 
+\includegraphics[width=\textwidth/1]{scenarios_cmd/Main_menu.png} 
+\caption{Main Menu}
+\end{figure}
+\begin{figure}
+\centering 
+\includegraphics[width=\textwidth/1]{scenarios_cmd/signed_in_menu.png}
+\caption{Signed in Menu}
+\end{figure}
+\begin{figure}
+\centering 
+\includegraphics[width=\textwidth/1]{scenarios_cmd/browse_menu.png}
+\caption{Browse the books}
+\end{figure}
+\begin{figure}
+\centering 
+\includegraphics[width=\textwidth/1]{scenarios_cmd/more_info.png}
+\caption{More information on a book}
+\end{figure}
+\begin{figure}
+\centering 
+\includegraphics[width=\textwidth/1]{scenarios_cmd/search.png}
+\caption{Searching for a specific book}
+\end{figure}
+\begin{figure}
+\centering 
+\includegraphics[width=\textwidth/1]{scenarios_cmd/adding_to_cart.png}
+\caption{Adding books to your cart}
+\end{figure}
+\begin{figure}
+\centering 
+\includegraphics[width=\textwidth/1]{scenarios_cmd/cart.png}
+\caption{Displaying your cart}
+\end{figure}
 \section{Github Repostiory}
 \href{https://github.com/WalterMitty2112/Online-Bookstore-Webapp}{Git Repo (Look Inna Book: Online Bookstore)}
 \section{Instructions for Submission}
@@ -72,6 +114,5 @@ NOTE: The command above, updates the currently running postgresql server with my
 \item Change the variables PGUSER and PGPASSWORD to your postgrsql username and password for the server
 \item To run the program, navigate to the \path{lib_app} folder use the command: \path{python app.py}
 \end{enumerate}
-\subsection{lib\_app\_js}
 
 \end{document}
