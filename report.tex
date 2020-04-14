@@ -7,23 +7,23 @@
 \usepackage{subcaption}
 \usepackage{amsgen,amsmath,amstext,amsbsy,amsopn,tikz,amssymb,tkz-linknodes}
 \usepackage{fancyhdr}
+\usepackage[obeyspaces,spaces]{url}
 \usepackage[colorlinks=true, urlcolor=blue,  linkcolor=blue, citecolor=blue]{hyperref}
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage{rotating}
-\usepackage{hyperref}
 %\usetikzlibrary{through,backgrounds}
-\hypersetup{%
-pdfauthor={Ashudeep Singh},%
-pdftitle={Assignment 4},%
-pdfkeywords={Tikz,latex,bootstrap,uncertaintes},%
-pdfcreator={PDFLaTeX},%
-pdfproducer={PDFLaTeX},%
+\hypersetup{
+pdfauthor={Ashudeep Singh},
+pdftitle={Assignment 4},
+pdfkeywords={Tikz,latex,bootstrap,uncertaintes},
+pdfcreator={PDFLaTeX},
+pdfproducer={PDFLaTeX},
 }
 %\usetikzlibrary{shadows}
 % \usepackage[francais]{babel}
+\usepackage{hyperref}
 \usepackage{booktabs}
 \input{macros.tex}
-
 
 \begin{document}
 \homework{Look Inna Book}{Due: Friday Apr. 3, 2020 (11:59 PM)}{Ahmed El-Roby}{}{Devon Hope}{101038344}
@@ -52,5 +52,25 @@ pdfproducer={PDFLaTeX},%
 \section{Github Repostiory}
 \href{https://github.com/WalterMitty2112/Online-Bookstore-Webapp}{Git Repo (Look Inna Book: Online Bookstore)}
 \section{Instructions for Submission}
+\begin{enumerate}
+\item Ensure that PostgreSQL is running on your machine, if not then install and run 
+\item Create a database called Bookstore
+\item Open a terminal or cmd for windows
+\item Navigate to \path{C:\Program Files\PostgreSQL\12\bin} or the bin folder of the latest version of your postgresql folder installed on your machine
+\item Open the folder `pgdb` under the `lib\_app' folder and copy the directory to the file `latest\_DB\_BACK.sql' file
+\item Enter the command: \\
+\path{psql -U <username> Bookstore < C:\Users\devon\Documents\UNI\W20\3005\PRO\look_inna_book\lib_app\pgdb\latest_DB_BACK.sql}
+\item Enter the password for your postgresql server
+\item The command above, updates the currently running postgresql server with my database structure and data
+\end{enumerate}
+\subsection{lib\_app}
+\begin{enumerate}
+\item Esnure python3 or later is installed on your machine by opening a terminal and typing: python --version
+\item Open the file cred\_pgsql.py
+\item Change the variables PGUSER and PGPASSWORD to your postgrsql username and password for the server
+\item To run the program, navigate to the lib\_app folder
+\item Use the command: python app.py
+\end{enumerate}
+\subsection{lib\_app\_js}
 
 \end{document}
