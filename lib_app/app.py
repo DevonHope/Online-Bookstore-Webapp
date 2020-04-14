@@ -94,6 +94,7 @@ def check_menu(user):
                         loop=0
             #here it should print a tracking number
             func.createTrack(user)
+            func.update_books(user)
             func.clearCart(user)
         elif(choice == 1):
             e = 1

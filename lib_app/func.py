@@ -78,8 +78,24 @@ def createTrack(user):
     insert_db(q)
     print("Tracking number: "+s)
 
+def update_books(user):
+    table = "book"
+    #get remaining and get sold
+    books = user.getCheck()
+    for b in books:
+        #print(b)
+        b="'"+b+"'"
+        w = "select bk_remain, bk_sold from {}.{} where bk_name = {}".format(str(schema),str(table),str(b))
+        res = load_db(w)
+        sold=int(res['bk_sold'][0]) +1
+        re=int(res['bk_remain'][0])-1
+        q = "update {}.{} set bk_sold = {}, bk_remain = {}".format(str(schema),str(table),str(sold),str(re))
+
 def clearCart(user):
+    # get rid of cart in db
     table = "checkout"
+    books=[]
+    user.setCheckout(books)
     q = "delete from {}.{} where ch_userid = {};".format(str(schema),str(table),str(user.getID()))
     insert_db(q)
 
