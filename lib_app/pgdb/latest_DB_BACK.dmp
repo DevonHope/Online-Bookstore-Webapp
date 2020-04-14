@@ -5,7 +5,7 @@
 -- Dumped from database version 12.2
 -- Dumped by pg_dump version 12.2
 
--- Started on 2020-04-14 13:55:21
+-- Started on 2020-04-14 14:05:30
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -452,7 +452,7 @@ ALTER TABLE ONLY allops.checkout
     ADD CONSTRAINT "user" FOREIGN KEY (ch_userid) REFERENCES allops."user"(user_id);
 
 
--- Completed on 2020-04-14 13:55:24
+-- Completed on 2020-04-14 14:05:34
 
 --
 -- PostgreSQL database dump complete
