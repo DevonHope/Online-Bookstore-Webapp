@@ -49,17 +49,19 @@ pdfproducer={PDFLaTeX},
 \subsection{Overview}
 \qquad I tried to complete the user and owner front end with a node.js web client but I couldn't before the due date, instead I implemented most of the user features, excluding the checkout and tracking in a command line version. I have pushed all versions of my project, whether complete or incomplete, to my github attached below. The version that works the best is under the directory `lib\_app', it uses python to query and connect to the postgresql and as an interface with the user. 
 \subsection{Scenarios}
+\subsubsection{lib\_app}
+\subsubsection{lib\_app\_js}
 \section{Github Repostiory}
 \href{https://github.com/WalterMitty2112/Online-Bookstore-Webapp}{Git Repo (Look Inna Book: Online Bookstore)}
 \section{Instructions for Submission}
 \begin{enumerate}
 \item Ensure that PostgreSQL is running on your machine, if not then install and run 
-\item Create a database called Bookstore
+\item Create a database called Bookstore under a postgrsql 12 server
 \item Open a terminal or cmd for windows
 \item Navigate to \path{C:\Program Files\PostgreSQL\12\bin} or the bin folder of the latest version of your postgresql folder installed on your machine
-\item Open the folder `pgdb` under the `lib\_app' folder and copy the directory to the file `latest\_DB\_BACK.sql' file
-\item Enter the command: \\
-\path{psql -U <username> Bookstore < C:\Users\devon\Documents\UNI\W20\3005\PRO\look_inna_book\lib_app\pgdb\latest_DB_BACK.sql}
+\item Open the folder `pgdb` under the `lib\_app' inside the project folder and copy the directory to the file `latest\_DB\_BACK.sql' file
+\item Change the command below to add your username and directory path to the file `latest\_DB\_BACK.sql': \\
+\path{psql -U <username> Bookstore < ..\look_inna_book\lib_app\pgdb\latest_DB_BACK.sql}
 \item Enter the password for your postgresql server
 \item The command above, updates the currently running postgresql server with my database structure and data
 \end{enumerate}
