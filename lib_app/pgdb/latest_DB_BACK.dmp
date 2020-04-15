@@ -5,7 +5,7 @@
 -- Dumped from database version 12.2
 -- Dumped by pg_dump version 12.2
 
--- Started on 2020-04-14 14:14:16
+-- Started on 2020-04-14 14:05:30
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -22,6 +22,10 @@ SET row_security = off;
 -- TOC entry 8 (class 2615 OID 33189)
 -- Name: allops; Type: SCHEMA; Schema: -; Owner: postgres
 --
+
+drop database if exists DB_name;
+create database DB_name;
+drop schema if exists allops;
 
 CREATE SCHEMA allops;
 
@@ -46,16 +50,16 @@ CREATE PROCEDURE allops.p_cuser(p_name character varying, p_username character v
     LANGUAGE plpgsql SECURITY DEFINER
     AS $$BEGIN
     if ( select exists (select 1 from allops.user where user_username = p_username) ) THEN
-     
+
         select 'Username Exists !!';
-     
+
     ELSE
-     
+
         insert into tbl_user ( user_name, user_username, user_pswd )
         values( p_name, p_username, p_password );
-     
+
     END IF;
-END; 
+END;
 $$;
 
 
@@ -452,9 +456,8 @@ ALTER TABLE ONLY allops.checkout
     ADD CONSTRAINT "user" FOREIGN KEY (ch_userid) REFERENCES allops."user"(user_id);
 
 
--- Completed on 2020-04-14 14:14:20
+-- Completed on 2020-04-14 14:05:34
 
 --
 -- PostgreSQL database dump complete
 --
-
