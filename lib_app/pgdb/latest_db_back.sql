@@ -5,7 +5,7 @@
 -- Dumped from database version 12.2
 -- Dumped by pg_dump version 12.2
 
--- Started on 2020-04-14 14:14:16
+-- Started on 2020-04-14 18:33:03
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -346,6 +346,10 @@ COPY allops.book (bk_name, bk_auth, bk_isbn, bk_genre, bk_pages, bk_numauth, bk_
 The Hitchhikers Guide To The Galaxy	Douglas Adams	9780345391803	Science Fiction	224	1	25	Paperback	English	Del Ray	1000	1	1	September 27 1995
 Dune	Frank Herbert	9780240807720	Science Fiction	412	1	7	Paperback	English	Chilton Books	999	2	200	August 1 1965
 Do Androids Dream Of Electric Sheep	Philip K. Dick	9781407234694	Science Fiction	210	1	6	Paperback	English	Doubleday	1200	3	400	1968
+Lord of the Rings: The Fellowship of the Ring	J.R.R. Tolkien	9780261102354	Fantasy Adventure	432	1	6	Paperback	English	Allen & Unwin	2342	12	412	29 July 1954
+Lord of the Rings: The Two Towers	J.R.R. Tolkien	9780618002238	Fantasy Adventure	327	1	6	Paperback	English	Allen & Unwin	242	13	232	11 November 1954
+Lord of the Rings: The Return of the King	J.R.R. Tolkien	9780345339737	Fantasy Adventure	412	1	6	Paperback	English	Allen & Unwin	809	14	907	20 October 1955
+Cloud Atlas	David Mitchell	340822775	Science Fiction	544	1	6	Paperback	English	Sceptre	921	14	23	2004
 \.
 
 
@@ -357,7 +361,6 @@ Do Androids Dream Of Electric Sheep	Philip K. Dick	9781407234694	Science Fiction
 
 COPY allops.checkout (ch_userid, ch_billaddr, ch_shipaddr, ch_books) FROM stdin;
 1234	\N	\N	{Dune:7}
-5	\N	\N	{Dune:7}
 \.
 
 
@@ -369,6 +372,16 @@ COPY allops.checkout (ch_userid, ch_billaddr, ch_shipaddr, ch_books) FROM stdin;
 
 COPY allops.order_track (order_num, last_loc, track_history, track_num) FROM stdin;
 6	Origin state	{"Shipped from warehouse","Left origin state"}	LIB-5kxnefhzhnr
+7	Origin state	{"Shipped from warehouse","Left origin state"}	LIB-5fsbbrlzick
+8	Origin state	{"Shipped from warehouse","Left origin state"}	LIB-5vmflvhdbcc
+9	Origin state	{"Shipped from warehouse","Left origin state"}	LIB-5judqjpylrw
+10	Origin state	{"Shipped from warehouse","Left origin state"}	LIB-5ophhhkoijh
+11	Origin state	{"Shipped from warehouse","Left origin state"}	LIB-5stoosckmmh
+12	Origin state	{"Shipped from warehouse","Left origin state"}	LIB-5fxpuuqthva
+13	Origin state	{"Shipped from warehouse","Left origin state"}	LIB-5jvtfxoorgd
+14	Origin state	{"Shipped from warehouse","Left origin state"}	LIB-5fhlxlkhsvm
+15	Origin state	{"Shipped from warehouse","Left origin state"}	LIB-5lryzvvylcm
+16	Origin state	{"Shipped from warehouse","Left origin state"}	LIB-5nvrsgkderg
 \.
 
 
@@ -452,7 +465,7 @@ ALTER TABLE ONLY allops.checkout
     ADD CONSTRAINT "user" FOREIGN KEY (ch_userid) REFERENCES allops."user"(user_id);
 
 
--- Completed on 2020-04-14 14:14:20
+-- Completed on 2020-04-14 18:33:05
 
 --
 -- PostgreSQL database dump complete
