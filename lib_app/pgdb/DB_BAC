@@ -5,7 +5,7 @@
 -- Dumped from database version 12.2
 -- Dumped by pg_dump version 12.2
 
--- Started on 2020-04-14 14:14:16
+-- Started on 2020-04-13 16:36:41
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -250,7 +250,7 @@ CREATE TABLE allops.order_track (
     order_num bigint NOT NULL,
     last_loc character varying,
     track_history character varying[],
-    track_num character varying
+    track_num bigint
 );
 
 
@@ -357,7 +357,6 @@ Do Androids Dream Of Electric Sheep	Philip K. Dick	9781407234694	Science Fiction
 
 COPY allops.checkout (ch_userid, ch_billaddr, ch_shipaddr, ch_books) FROM stdin;
 1234	\N	\N	{Dune:7}
-5	\N	\N	{Dune:7}
 \.
 
 
@@ -368,7 +367,6 @@ COPY allops.checkout (ch_userid, ch_billaddr, ch_shipaddr, ch_books) FROM stdin;
 --
 
 COPY allops.order_track (order_num, last_loc, track_history, track_num) FROM stdin;
-6	Origin state	{"Shipped from warehouse","Left origin state"}	LIB-5kxnefhzhnr
 \.
 
 
@@ -389,12 +387,11 @@ COPY allops.publisher (p_id, p_name, p_addr, p_email, p_phnum, p_bacct) FROM std
 --
 
 COPY allops."user" (user_id, user_name, user_username, user_pswd, user_biladdr, user_shipaddr, user_email) FROM stdin;
-5	Devon Hope	d_hope	popeey	123 d, d, d, d, d	123 d, d, d, d, d	d@mail.com
-1234	dummy	udummy	pass	null	null	dumyy@mail.com
-12	d	de	pass	null	null	d@mail.com
-3	bunny	bunalou	gbuns	null	null	buns@garbunso.ca
-4	bunalou	buns	gbuns	null	null	g@buns.ca
-1	The Man	Mansly	not pass	123 mans way, no men, some state, old country, postal	123 mans way, no men, some state, old country, postal	mansly@mens.ca
+1234	dummy	udummy	pass	1234 not here lane	1234 not here ave	dumyy@mail.com
+12	d	de	pass	\N	\N	d@mail.com
+3	bunny	bunalou	gbuns	\N	\N	buns@garbunso.ca
+4	bunalou	buns	gbuns	\N	\N	g@buns.ca
+5	Devon Hope	d_hope	popeey	\N	\N	d@mail.com
 \.
 
 
@@ -452,7 +449,7 @@ ALTER TABLE ONLY allops.checkout
     ADD CONSTRAINT "user" FOREIGN KEY (ch_userid) REFERENCES allops."user"(user_id);
 
 
--- Completed on 2020-04-14 14:14:20
+-- Completed on 2020-04-13 16:36:44
 
 --
 -- PostgreSQL database dump complete
