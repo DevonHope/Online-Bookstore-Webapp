@@ -1,0 +1,9 @@
+{
+  "name": "LIB",
+  "version": "1.0.0",
+  "description": "command line bookstore for PGDB and python",
+  "main": "app.py",
+  "dependencies": {
+    "numpy": "0.0.1"
+  }
+}
