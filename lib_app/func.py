@@ -120,7 +120,9 @@ def update_cart(user):
         #get billing address
         user = getAddr(user)
     if(not res['ch_userid']):
-        con = "insert into {}.{} (ch_userid, ch_books, ch_biladdr, ch_shipaddr) values ({},ARRAY{},{},{});".format(str(schema),str(table),str(user.getID()),book,str(user.getBA()), str(user.getSA()))
+        sa = "'"+user.getSA()+"'"
+        ba = "'"+user.getBA()+"'"
+        con = "insert into {}.{} (ch_userid, ch_books, ch_billaddr, ch_shipaddr) values ({},ARRAY{},{},{});".format(str(schema),str(table),str(user.getID()),book,ba, sa)
     else:
         con = "update {}.{} set ch_books = ARRAY{} where ch_userid = {};".format(str(schema),str(table), book,str(user.getID()))
     insert_db(con)
